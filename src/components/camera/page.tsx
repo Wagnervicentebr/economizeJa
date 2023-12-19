@@ -27,7 +27,7 @@ const Camera = () => {
 
   return (
     <div className={styles.cameraContainer}>
-          <video id="video" height="400" width="450" autoPlay  playsInline muted></video>
+          <video id="video" height="400" width="450" autoPlay={true}  playsInline={true} muted={true}></video>
     </div>
   )
 }
