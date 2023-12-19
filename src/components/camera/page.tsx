@@ -19,7 +19,6 @@ const Camera = () => {
                 video.srcObject = stream;
                 video.play();
                 console.log(stream, "streaming");
-                alert("Permitido");
             })
             .catch(e => {
                 console.log("background error : " + e.name);
@@ -30,15 +29,28 @@ const Camera = () => {
             inputStream : {
               name : "Live",
               type : "LiveStream",
-              target: document.querySelector('#video')    
+              target: document.querySelector('#video'),
+              area: { // defines rectangle of the detection/localization area
+                top: "0%",    // top offset
+                right: "0%",  // right offset
+                left: "0%",   // left offset
+                bottom: "0%"  // bottom offset
+              },
+              locate : false,
+              singleChannel: true
             },
             frequency: 10,
             decoder: {
-                readers: [
-                    'ean_reader'
-                ],
+                readers: [{
+                    format: "ean_reader",
+                    config: {
+                        supplements: [
+                            'ean_5_reader', 'ean_2_reader'
+                        ]
+                    }
+                }],
                 multiple: false
-            }
+            },
           }, function(err) {
               if (err) {
                   console.log(err);
@@ -56,7 +68,10 @@ const Camera = () => {
 
   return (
     <div className={styles.cameraContainer}>
-          <video id="video" height="400" width="450" autoPlay={true}  playsInline={true} muted={true}></video>
+        <div className={styles.cameraGroup}>
+            <video id="video"  autoPlay={true}  playsInline={true} muted={true}></video>
+            <div className={styles.lineCanva}></div>
+        </div>
     </div>
   )
 }
