@@ -19,6 +19,7 @@ const Camera = () => {
                 video.srcObject = stream;
                 video.play();
                 console.log(stream, "streaming");
+                alert("Permitido");
             })
             .catch(e => {
                 console.log("background error : " + e.name);
