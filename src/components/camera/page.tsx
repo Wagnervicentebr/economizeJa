@@ -30,14 +30,6 @@ const Camera = () => {
               name : "Live",
               type : "LiveStream",
               target: document.querySelector('#video'),
-              area: { // defines rectangle of the detection/localization area
-                top: "0%",    // top offset
-                right: "0%",  // right offset
-                left: "0%",   // left offset
-                bottom: "0%"  // bottom offset
-              },
-              locate : false,
-              singleChannel: true
             },
             frequency: 10,
             decoder: {
