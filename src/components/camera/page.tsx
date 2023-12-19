@@ -32,8 +32,12 @@ const Camera = () => {
               type : "LiveStream",
               target: document.querySelector('#video')    
             },
-            decoder : {
-              readers : ["code_128_reader"]
+            frequency: 10,
+            decoder: {
+                readers: [
+                    'ean_reader'
+                ],
+                multiple: false
             }
           }, function(err) {
               if (err) {
