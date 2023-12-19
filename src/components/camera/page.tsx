@@ -9,7 +9,9 @@ const Camera = () => {
 
         if (navigator.mediaDevices.getUserMedia !== null) {
           var options = {
-            video: true,
+            video: {
+                facingMode: 'environment'
+            },
           };
           navigator.mediaDevices.getUserMedia(options)
             .then((stream) => {
