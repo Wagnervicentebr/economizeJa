@@ -6,35 +6,30 @@ import Quagga from 'quagga'; // ES6
 const Camera = () => {
 
     useEffect(() => {
-        // let video: HTMLVideoElement = document.getElementById("video") as HTMLVideoElement;
-
-        // if (navigator.mediaDevices.getUserMedia !== null) {
-        //   var options = {
-        //     video: {
-        //         facingMode: 'environment'
-        //     },
-        //   };
-        //   navigator.mediaDevices.getUserMedia(options)
-        //     .then((stream) => {
-        //         video.srcObject = stream;
-        //         video.play();
-                
-        //         console.log(stream, "streaming");
-        //     })
-        //     .catch(e => {
-        //         console.log("background error : " + e.name);
-        //     });
-        // }
-
         Quagga.init({
             inputStream : {
                 name : "Live",
                 type : "LiveStream",
                 target: document.querySelector('#video')    // Or '#yourElement' (optional)
               },
+              area: { // defines rectangle of the detection/localization area
+                top: "0%",    // top offset
+                right: "0%",  // right offset
+                left: "0%",   // left offset
+                bottom: "0%"  // bottom offset
+              },
+              singleChannel: false,
+              constraints: {
+                width: 640,
+                height: 480,
+                facingMode: "environment",
+              },
               decoder : {
                 readers : ["ean_reader"]
-              }
+              },
+              numOfWorkers: 4,
+              locate: true,
+              frequency: 10,
             }, function(err) {
                 if (err) {
                     console.log(err);
@@ -55,11 +50,7 @@ const Camera = () => {
     
   return (
     <div className={styles.cameraContainer}>
-        {/* <div className={styles.cameraGroup}>
-            <video id="video"  autoPlay={true}  playsInline={true} muted={true}></video>
-            <div className={styles.lineCanva}></div>
-        </div> */}
-        <div id="video"></div>
+       <div id="video"><video playsInline autoPlay></video></div>
     </div>
   )
 }
