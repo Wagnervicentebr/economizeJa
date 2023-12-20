@@ -16,10 +16,10 @@
 }
 
 .lineCanva {
-    border: 2px solid green;
+    width: 80%;
+    height: 0.250rem;
+    background: red;
     position: absolute;
-    top: 40%;
-    left: 25%;
-    width: 50%;
-    height: 20%;
+    top: 50%;
+    left: 10%;
 }
