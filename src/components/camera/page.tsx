@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import styles from './page.module.css'
 import Quagga from 'quagga'; // ES6
 
-const Camera = () => {
+const Camera = ({onDetectItem}) => {
 
     useEffect(() => {
         Quagga.init({
@@ -29,8 +29,6 @@ const Camera = () => {
               },
               numOfWorkers: 4,
               frequency: 10,
-              halfSample: true,
-              patchSize: "large",
             }, function(err) {
                 if (err) {
                     console.log(err);
@@ -41,9 +39,10 @@ const Camera = () => {
             });
 
 
-          Quagga.onDetected(data => {
-            alert(data.codeResult.code);
-            console.log(data);
+          Quagga.onDetected(result => {
+            const data = result.codeResult.code;
+            
+            onDetectItem(data.substring(data.length - 6, data.length));
           })
     }, []);
 
