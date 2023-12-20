@@ -28,7 +28,7 @@ interface Produto {
 }
 const Home = () => {
 
-  const [itemEncontrado, setItemEncontrado] = useState<Produto>({})
+  const [itemEncontrado, setItemEncontrado] = useState<Produto>()
 
   const handdleDetectItem = (data) => {
     console.log(data);
