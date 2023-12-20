@@ -6,11 +6,7 @@ import Quagga from '@ericblade/quagga2';
 
 const Camera = () => {
 
-    const locator = {
-        patchSize: 'medium',
-        halfSample: true,
-        willReadFrequently: true,
-    };;
+    
     
     useEffect(() => {
         let video: HTMLVideoElement = document.getElementById("video") as HTMLVideoElement;
@@ -18,15 +14,14 @@ const Camera = () => {
         if (navigator.mediaDevices.getUserMedia !== null) {
           var options = {
             video: {
-                facingMode: 'environment',
-                zoom: true
+                facingMode: 'environment'
             },
           };
           navigator.mediaDevices.getUserMedia(options)
             .then((stream) => {
                 video.srcObject = stream;
                 video.play();
-                
+
                 console.log(stream, "streaming");
             })
             .catch(e => {
@@ -45,8 +40,6 @@ const Camera = () => {
             decoder: {
                 readers: ["ean_reader"],
             },
-            locator,
-            locate: true
           }, function(err) {
               if (err) {
                   console.log(err);
@@ -56,7 +49,6 @@ const Camera = () => {
               Quagga.start();
           });
 
-          Quagga.onProcessed(handleProcessed);
 
           Quagga.onDetected(data => {
             const err = getMedianOfCodeErrors(data.codeResult.decodedCodes);
@@ -84,40 +76,6 @@ const Camera = () => {
         return medianOfErrors;
     }
 
-
-      const handleProcessed = (result) => {
-        const drawingCtx = Quagga.canvas.ctx.overlay;
-        const drawingCanvas = Quagga.canvas.dom.overlay;
-        drawingCtx.font = "24px Arial";
-        drawingCtx.fillStyle = 'green';
-            
-        if (result) {
-            // console.warn('* quagga onProcessed', result);
-            if (result.boxes) {
-                drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute('width')), parseInt(drawingCanvas.getAttribute('height')));
-                result.boxes.filter((box) => box !== result.box).forEach((box) => {
-                    Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: 'purple', lineWidth: 2 });
-                });
-                
-            }
-            if (result.box) {
-                Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: 'blue', lineWidth: 2 });
-            
-            }
-            if (result.codeResult && result.codeResult.code) {
-                // const validated = barcodeValidator(result.codeResult.code);
-                // const validated = validateBarcode(result.codeResult.code);
-                // Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: validated ? 'green' : 'red', lineWidth: 3 });
-                drawingCtx.font = "24px Arial";
-                // drawingCtx.fillStyle = validated ? 'green' : 'red';
-                // drawingCtx.fillText(`${result.codeResult.code} valid: ${validated}`, 10, 50);
-                drawingCtx.fillText(result.codeResult.code, 10, 20);
-                // if (validated) {
-                //     onDetected(result);
-                // }
-            }
-        }
-    };
 
   return (
     <div className={styles.cameraContainer}>
