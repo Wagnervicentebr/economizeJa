@@ -19,9 +19,16 @@ const mock = [
     imagem: "https://www.drogariaminasbrasil.com.br/media/product/c07/cha-de-camomila-leao-com-10-saquinhos-cee.jpg"
   },
 ]
+
+interface Produto {
+    id: string,
+    title: string,
+    lastValue: string,
+    imagem: string,
+}
 const Home = () => {
 
-  const [itemEncontrado, setItemEncontrado] = useState({})
+  const [itemEncontrado, setItemEncontrado] = useState<Produto>({})
 
   const handdleDetectItem = (data) => {
     console.log(data);
