@@ -1,4 +1,4 @@
-import Camera from '@/components/Camera/page'
+import Camera from '@/components/camera/page'
 import React from 'react'
 
 const Home = () => {
