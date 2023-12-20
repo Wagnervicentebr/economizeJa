@@ -29,6 +29,8 @@ const Camera = () => {
               },
               numOfWorkers: 4,
               frequency: 10,
+              halfSample: true,
+              patchSize: "large",
             }, function(err) {
                 if (err) {
                     console.log(err);
