@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <div>
 
-      {!itemEncontrado.title ? 
+      {!itemEncontrado?.title ? 
         <Camera onDetectItem={handdleDetectItem}/>
         :
         <div className={styles.container}>
