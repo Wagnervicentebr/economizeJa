@@ -28,7 +28,6 @@ const Camera = () => {
                 readers : ["ean_reader"]
               },
               numOfWorkers: 4,
-              locate: true,
               frequency: 10,
             }, function(err) {
                 if (err) {
